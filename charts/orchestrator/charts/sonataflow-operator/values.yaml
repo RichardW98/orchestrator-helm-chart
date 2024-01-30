@@ -1,0 +1,41 @@
+#openshift:
+#  enabled: {{ .Values.global.openshift }}
+  # to be overriden by the openshift sub-chart
+  # recommneded to do this from the parent chart
+  # using sonataFlowOperator.openshift.subscription
+
+tags:
+  openshift: false
+  kubernetes: false
+
+
+global:
+  orchestrator:
+    devmode: false # devmode runs sonataflow services in ephemeral mode (for a non-production use)
+    namespace: sonataflow-infra # namespace where the data index, job service and workflows are deployed
+    sonataPlatform:
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "1Gi"
+          cpu: "500m"
+      dataIndex:
+        image: "quay.io/kiegroup/kogito-data-index-postgresql-nightly:latest" # To be removed when stable version is released
+      jobService:
+        image: "quay.io/kiegroup/kogito-jobs-service-postgresql-nightly:latest" # To be removed when stable version is released
+    sonataflows: # workflows to get deployed - this option will be removed once the plugin will interact directly with the data-index
+      - name: greeting
+        image: quay.io/orchestrator/serverless-workflow-greeting:latest
+
+  postgres:
+    serviceName: "sonataflow-psql-postgresql" # The name of the Postgres DB service to be used by dataindex and job service. Cannot be empty.
+    serviceNamespace: "sonataflow-infra" # The namespace of the Postgres DB service to be used by dataindex and job service.
+    authSecret:
+      name: "sonataflow-psql-postgresql" # name of existing secret to use for PostgreSQL credentials.
+      userKey: postgres-username # name of key in existing secret to use for PostgreSQL credentials.
+      passwordKey: postgres-password # name of key in existing secret to use for PostgreSQL credentials.
+    database: sonataflow # existing database instance used by data index and job service
+
+

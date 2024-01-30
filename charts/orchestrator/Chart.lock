@@ -2,5 +2,14 @@ dependencies:
 - name: backstage
   repository: https://janus-idp.github.io/helm-backstage
   version: 2.12.1
-digest: sha256:ef07d6cadee4a3a7b4b565cf31515b872eaa765ab829f26e71813af1e9334779
-generated: "2024-01-24T13:20:18.310660694+02:00"
+- name: serverlessOperator
+  repository: file://charts/serverless-operator
+  version: 0.2.0
+- name: sonataFlowOperator
+  repository: file://charts/sonataflow-operator
+  version: 0.2.0
+- name: workflows
+  repository: https://parodos.dev/serverless-workflows-helm
+  version: 0.2.0
+digest: sha256:94b15d70117f0d87a2c5166b9b3a146f17c37a04ea32f4f664838663f8030363
+generated: "2024-01-31T16:04:38.157586474+02:00"

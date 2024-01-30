@@ -31,3 +31,16 @@ dependencies:
   - name: backstage
     repository: https://janus-idp.github.io/helm-backstage
     version: "2.12.1"
+  - name: serverlessOperator
+    repository: "file://charts/serverless-operator"
+    version: "0.2.0"
+    condition: serverlessOperator.enabled
+  - name: sonataFlowOperator
+    repository: "file://charts/sonataflow-operator"
+    version: "0.2.0"
+    condition: sonataFlowOperator.enabled
+  - name: workflows
+    repository: https://parodos.dev/serverless-workflows-helm
+    version: "0.2.0"
+    condition: workflows.enabled
+
